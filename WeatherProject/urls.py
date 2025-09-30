@@ -20,5 +20,6 @@ from weather import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.cityWeather)
+    path('', views.index),
+    path('weather', views.cityWeather, name='weather')
 ]

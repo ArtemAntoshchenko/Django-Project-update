@@ -1,35 +1,34 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import CityForm
-from .models import City
+from .models import City, WeatherInfo
 import requests
 
-# def index(request):
-#     if request.method=='POST':
-#         city_name=request.POST.get('city')
-#     return render(request, 'choose_city.html')
+def index(request):
+    form=CityForm()
+    return render(request, 'choose_city.html', {'form' : form})
 
 def cityWeather(request):
     url='http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=1c9e7a15fb80db1fdb34cfb47907cec9'
 
     if request.method=='POST':
         form=CityForm(request.POST)
-        form.save()
+        if form.is_valid():
+            city_name=form.cleaned_data['name']
+            if City.objects.filter(name=city_name).exists():
+                pass
+            else:
+                form.save()
 
-    form=CityForm()
-    cities=City.objects.all()
-    weather_data=[]
-    
-    for city in cities:
-        response=requests.get(url.format(city)).json()
-        city_weather={
-            'city' : city,
+    response=requests.get(url.format(city_name)).json()
+    # WeatherInfo.objects.
+
+    city_weather={
+            'city' : city_name,
             'temperature' : response['main']['temp'],
             'description' : response['weather'][0]['description'],
             'icon' : response['weather'][0]['icon'],
         }
 
-        weather_data.append(city_weather)
-
-    context={'weather_data' : weather_data, 'form' : form}
+    context={'city_weather' : city_weather}
     return render(request, 'weather.html', context)
 
