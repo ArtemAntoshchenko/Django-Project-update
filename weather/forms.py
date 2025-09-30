@@ -6,8 +6,8 @@ class CityForm(ModelForm):
         model = City
         fields = ['name']
 
-class WeatherInfo(ModelForm):
-    class Meta:
-        model = WeatherInfo
-        fields = '__all__'
-        exclude = ['weatherInfo']
+# class WeatherInfo(ModelForm):
+#     class Meta:
+#         model = WeatherInfo
+#         fields = '__all__'
+#         exclude = ['weatherInfo']
