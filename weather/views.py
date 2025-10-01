@@ -14,14 +14,15 @@ def cityWeather(request):
         form=CityForm(request.POST)
         if form.is_valid():
             city_name=form.cleaned_data['name']
+            response=requests.get(url.format(city_name)).json()
             if City.objects.filter(name=city_name).exists():
                 pass
             else:
-                form.save()
-
-    response=requests.get(url.format(city_name)).json()
-    # WeatherInfo.objects.
-
+                idSave=form.save()
+                WeatherInfo.objects.create(
+                    weather=response['weather'][0]['main'], temp=response['main']['temp'], humidity=response['main']['humidity'], weatherInfo=idSave
+                    )
+    
     city_weather={
             'city' : city_name,
             'temperature' : response['main']['temp'],

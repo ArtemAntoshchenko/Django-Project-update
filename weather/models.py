@@ -10,7 +10,8 @@ class City(models.Model):
         verbose_name_plural = 'cities'
 
 class WeatherInfo(models.Model):
-    data = models.DateTimeField()
-    weather = models.CharField(max_length=25)
+    weather = models.CharField(max_length=10)
     temp = models.IntegerField()
-    weatherInfo=models.OneToOneField('City', on_delete=models.CASCADE, primary_key=True)
+    humidity = models.IntegerField(default=0)
+    wind_speed = models.IntegerField(default=0)
+    weatherInfo = models.OneToOneField('City', on_delete=models.CASCADE, primary_key=True)
