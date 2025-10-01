@@ -20,6 +20,9 @@ from weather import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('', views.country),
+    path('russian', views.Russia, name='russian'),
+    path('usa', views.USA, name='usa'),
+    path('japan', views.Japan, name='japan'),
     path('weather', views.cityWeather, name='weather')
 ]

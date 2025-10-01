@@ -1,13 +1,23 @@
 from django.forms import ModelForm, TextInput
-from .models import City, WeatherInfo
+from .models import Country, RussiaCity, USACity, JapanCity
 
-class CityForm(ModelForm):
+class CountryForm(ModelForm):
     class Meta:
-        model = City
+        model = Country
         fields = ['name']
 
-# class WeatherInfo(ModelForm):
-#     class Meta:
-#         model = WeatherInfo
-#         fields = '__all__'
-#         exclude = ['weatherInfo']
+class RussiaCityForm(ModelForm):
+    class Meta:
+        model = RussiaCity
+        fields = ['nameRussia']
+
+class USACityForm(ModelForm):
+    class Meta:
+        model = USACity
+        fields = ['nameUSA']
+
+class JapanCityForm(ModelForm):
+    class Meta:
+        model = JapanCity
+        fields = ['nameJapan']
+

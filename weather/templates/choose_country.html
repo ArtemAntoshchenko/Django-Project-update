@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Укажите город:</h1>
-    <form method="post" action="weather">
+    <h1>Выберите страну:</h1>
+    <form method="post">
         {% csrf_token %}
         {{form}}<br>
         <input type="submit" value="Отправить">
