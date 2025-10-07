@@ -38,7 +38,6 @@ def cityWeather(request):
             if form.is_valid():
                 city_name=form.cleaned_data['nameRussia']
                 response=requests.get(url.format(city_name)).json()
-                print(response)
             # if City.objects.filter(name=city_name).exists():
             #     pass
             # else:
